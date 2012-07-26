@@ -47,7 +47,13 @@
             </properties>
         </developer>
     </developers>
-
+    
+    <scm>
+        <connection>scm:git:git://github.com/devesion/jsr308-checkers-plugin.git</connection>
+        <url>scm:git:git://github.com/devesion/jsr308-checkers-plugin.git</url>
+        <developerConnection>scm:git:git://github.com/devesion/jsr308-checkers-plugin.git</developerConnection>
+    </scm>
+    
     <build>
         <plugins>
             <plugin>
