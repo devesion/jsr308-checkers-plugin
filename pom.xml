@@ -1,0 +1,99 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.devesion.maven</groupId>
+    <artifactId>jsr308-checkers-plugin</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>maven-plugin</packaging>
+
+    <name>jsr308-checkers-plugin</name>
+    <url>http://devesion.org/projects/jsr308-checkers-plugin</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <netbeans.hint.license>devesion-opensource</netbeans.hint.license>
+    </properties>
+
+    <licenses>
+        <license>
+            <name>Apache 2</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    
+    <organization>
+        <name>Devesion</name>
+        <url>http://www.devesion.com</url>
+    </organization>
+  
+    <developers>
+        <developer>
+            <id>dembol</id>
+            <name>Lukas Dembinski</name>
+            <email>dembol@devesion.com</email>
+            <url>http://dembol.org</url>
+            <organization>Devesion</organization>
+            <organizationUrl>http://www.devesion.com</organizationUrl>
+            <roles>
+                <role>architect</role>
+                <role>developer</role>
+            </roles>
+            <timezone>1</timezone>
+            <properties>
+                <picUrl>http://dembol.org/blog/wp-content/uploads/2011/10/dembol_100.jpg</picUrl>
+            </properties>
+        </developer>
+    </developers>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-plugin-api</artifactId>
+            <version>2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-artifact</artifactId>
+            <version>2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>types.checkers</groupId>
+            <artifactId>jsr308-all</artifactId>
+            <version>1.2.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-exec</artifactId>
+            <version>1.1</version>
+        </dependency>
+    </dependencies>
+
+    <distributionManagement>
+        <repository>
+            <id>devesion.repo</id>
+            <name>Releases</name>
+            <url>http://maven.devesion.com/nexus/content/repositories/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>devesion.repo</id>
+            <name>Snapshots</name>
+            <url>http://maven.devesion.com/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+</project>

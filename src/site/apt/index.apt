@@ -1,0 +1,21 @@
+What is JSR-308 Checkers Plugin?
+
+    JSR-308 Checkers Plugin is a Maven 2 plugin which enables you to use JSR-308
+    checkers in your project. The plugin runs forked JVM doing additional verification 
+    of the source code. There are several predefined checkers available - nullness 
+    checker, immutability checker, interning checker, lock checker etc. For additional 
+    description, read the {{http://types.cs.washington.edu/checker-framework/current/checkers-manual.html | JSR-308 checkers manual}}
+
+How to use it?
+
+    First, you should add following repositories in your pom.xml:
++-----+
++-----+
+
+Downloads
+
+    The source code is available on github: {{https://github.com/devesion/n2io}}
+
+    Binaries are available in the maven repository: {{link to 1.0 release}}
+
+    

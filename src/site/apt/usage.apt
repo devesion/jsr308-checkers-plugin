@@ -1,0 +1,163 @@
+Usage
+
+    To be able to use N2IO framework as Maven depencency you'll have to add the following repository to your 
+    pom.xml
+    
++-----+
+<repositories>  
+    <repository>  
+        <id>devesion.repo</id>
+        <name>Releases</name>
+        <url>http://maven.devesion.com/nexus/content/repositories/releases</url>
+        <releases>  
+            <enabled>true</enabled>  
+        </releases>  
+        <snapshots>  
+            <enabled>false</enabled>  
+        </snapshots>  
+    </repository>  
+</repositories> 
++-----+
+
+    After that add the following dependencies to pom.xml
+
++-----+
+<dependency>
+    <groupId>com.devesion.n2io</groupId>
+    <artifactId>n2io</artifactId>
+    <version>1.0</version>
+</dependency>
++-----+
+
+* Defining stages
+
+    Next, you can define your first stages. As an example we'll write a simple telnet chat server.
+    The server just accept TCP connections on port 5000, read client messages and broadcast it to the
+    other connected clients.
+
+** Stage one - Front Controller Stage
+    The first stage we define is FrontController stage in thread-based concurrency model.
+
++-----+
+public class FrontControllerHandler implements SyncStageHandler {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(FrontControllerHandler.class);
+
+    @Override
+    public void onStart(StageContext ctx) throws StageException {
+    }
+
+    @Override
+    public void onEnd(StageContext ctx) throws StageException {
+    }
+
+    @Override
+    public void onClose(StageContext ctx) throws StageException {
+        LOGGER.info("Closed connection from " + ctx.getConnection());
+    }
+
+    @Override
+    public boolean onControl(StageContext ctx) {
+
+        // check user rights to access etc
+        // for now we only log connection
+        LOGGER.info("Connection from " + ctx.getConnection());
+
+        return true;
+    }
+
+    @Override
+    public void onError(StageContext ctx, Throwable t) throws StageException {
+    }
+}
++-----+
+
+** Stage two - Chat Stage
++-----+
+public class ChatHandler implements AsyncStageHandler {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ChatHandler.class);
+    
+    private static Set<StageContext> contexts = new HashSet<StageContext>();
+
+    private static Set<String> allowedEventsSet = new HashSet<String>();
+    
+    @Override
+    public Set<String> allowedEvents() {
+        return allowedEventsSet;
+    }
+
+    @Override
+    public void onStart(StageContext ctx) throws StageException {
+        contexts.add(ctx);
+        allowedEventsSet.add(Event.EVENT_READ);
+        allowedEventsSet.add(Event.EVENT_WRITE);
+    }
+    
+    @Override
+    public void onClose(StageContext ctx) throws StageException {
+        contexts.remove(ctx);
+    }
+
+    @Override
+    public boolean onEvent(StageContext ctx, Event e) throws StageException {
+        
+        if (e.getName().equals(Event.EVENT_READ)) {
+            return onRead(ctx);
+        } else 
+        if (e.getName().equals(Event.EVENT_WRITE)) {
+            LOGGER.info("test write");
+            allowedEventsSet.remove(Event.EVENT_WRITE);
+            // We still stay in the current stage.
+            return false;
+        }
+        
+        // Changing stage.
+        return true;
+    }
+    
+    private boolean onRead(StageContext ctx) throws StageException {
+        
+        final TextConnection c = new TextConnection(ctx.getConnection());
+        
+        try {
+            final String s = c.readText();
+            LOGGER.info("message '" + s.trim() + "' from " + c);
+            if (s.startsWith("quit")) {
+                contexts.remove(ctx);
+                
+                // Changing stage.
+                return true;
+            }
+            
+            for (StageContext curCtx : contexts) {
+
+                if (curCtx.equals(ctx)) {
+                    continue;
+                }
+                
+                final TextConnection curC = new TextConnection(curCtx.getConnection());
+                curC.writeText(s);
+            }
+            
+        } catch (ConnectionException e) {
+            LOGGER.error("connection error", e);
+        }
+
+        // We still stay in the current stage.
+        return false;
+    }
+    
+    @Override
+    public void onEnd(StageContext ctx) throws StageException {
+    }
+
+    @Override
+    public void onError(StageContext ctx, Throwable t) throws StageException {
+    }
+}
++-----+
+
+
+
+
