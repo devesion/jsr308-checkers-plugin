@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<project name="n2io">
+<project name="jsr308-checkers-plugin">
 
-<!--    <skin>
-        <groupId>org.apache.maven.skins</groupId>
-        <artifactId>maven-stylus-skin</artifactId>
-        <version>1.4</version>
-    </skin>
-  -->
     <skin>
         <groupId>com.googlecode.fluido-skin</groupId>
         <artifactId>fluido-skin</artifactId>
@@ -24,13 +18,10 @@
     </custom>
 
   <bannerLeft>
-    <name>N2IO</name>
+    <name>JSR-308 Checkers Plugin</name>
     <src>/images/logo.png</src>
-    <href>http://n2io.devesion.com</href>
-  </bannerLeft><!--
-  <bannerRight>
-    <src>http://maven.apache.org/images/maven-small.gif</src>
-  </bannerRight>-->
+    <href>http://devesion.com/jsr308-checkers-plugin</href>
+  </bannerLeft>
   
   <body>
     <links>
@@ -39,13 +30,9 @@
       <item name="Author" href="http://dembol.org"/>
     </links>
 
-    <menu name="N2IO">
+    <menu name="Plugin">
       <item name="Introduction" href="index.html"/>
       <item name="Usage" href="usage.html"/>
-      <item name="Download" href="download.html"/>
-<!--      <item name="Release Notes" href="release-notes.html" />
-      <item name="General Information" href="about.html"/>
-      <item name="Road Map" href="roadmap.html" />-->
     </menu>
     
     <menu ref="reports" />

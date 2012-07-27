@@ -4,18 +4,13 @@ What is JSR-308 Checkers Plugin?
     checkers in your project. The plugin runs forked JVM doing additional verification 
     of the source code. There are several predefined checkers available - nullness 
     checker, immutability checker, interning checker, lock checker etc. For additional 
-    description, read the {{http://types.cs.washington.edu/checker-framework/current/checkers-manual.html | JSR-308 checkers manual}}
-
-How to use it?
-
-    First, you should add following repositories in your pom.xml:
-+-----+
-+-----+
+    description, read the {{{http://types.cs.washington.edu/checker-framework/current/checkers-manual.html} JSR-308 checkers manual}}
 
 Downloads
 
-    The source code is available on github: {{https://github.com/devesion/n2io}}
+    The source code is available on github: {{https://github.com/devesion/jsr308-checkers-plugin}}
 
-    Binaries are available in the maven repository: {{link to 1.0 release}}
+    Binaries are available in the maven repository: {{{http://maven.devesion.com/nexus/content/repositories/releases/com/devesion/maven/jsr308-checkers-plugin/1.0/jsr308-checkers-plugin-1.0.jar} jsr308-checkers-plugin-1.0.jar}}
+
 
     
